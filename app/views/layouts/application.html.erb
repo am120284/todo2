@@ -6,19 +6,28 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-<% if user_signed_in? %>
-	You are currently signed in as <%= current_user.email %>, not you?
-	<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-<% else %>
-	<%= link_to "Sign Up!", new_user_registration_path %> or <%= link_to "Sign in", new_user_session_path %>
-<% end %>
+	<body>
+	 <div class="container">
 
-<% flash.each do |name, message| %>
-	<% content_tag :div, message, :id => "flash#{name}" %>
-<% end %>
+       <ul class="nav nav-tabs">
+       		<div class="pull-right user-info">
+				<% if user_signed_in? %>
+					Hello <%= current_user.name %>!, not you?
+					<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+				<% else %>
+					<%= link_to "Sign Up!", new_user_registration_path %> or 
+					<%= link_to "Sign in", new_user_session_path %>
+				<% end %>
+	  		</div>
 
-<%= yield %>
+	  		<% flash.each do |name, message| %>
+			<% content_tag :div, message, :id => "flash#{name}" %>
+		<% end %>
+		
+		<%= yield %>
 
-</body>
+	</body>
 </html>
+
+
+		
