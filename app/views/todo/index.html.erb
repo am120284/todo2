@@ -13,6 +13,11 @@
 	<h1>Todo Items</h1>
 
 	<h2>Todo List</h2>
+	<small>
+         submitted <%= time_ago_in_words(todos.created_at) %> ago by <%= todos.user.name %><br>
+         <%= todos.comments.count %> Comments
+       </small>
+
 	<p><%= link_to "Add an item to the list", new_todo_path %></p>
 	<% @todos.each do |t| %>
 		<%= "#{t.days_left} ,days left till expiration"%>
