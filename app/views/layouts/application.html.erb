@@ -7,18 +7,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<% if user_signed_in? %>
-	You are currently signed in as <%= current_user.email %>, not you?
-	<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-<% else %>
-	<%= link_to "Sign Up!", new_user_registration_path %> or <%= link_to "Sign in", new_user_session_path %>
-<% end %>
+	<div class="container">
 
-<% flash.each do |name, message| %>
-	<% content_tag :div, message, :id => "flash#{name}" %>
-<% end %>
+	<ul class="nav nav-tabs">
+         <li><%= link_to "BlocitOff", todo_index_path %></li>
 
-<%= yield %>
+      <div class="pull-right user-info">
+           <% if signed_in?%>
+             Hello <%= current_user.email %>! <%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+           <% else %>
+             <%= link_to "Sign In", new_user_session_path %> or
+             <%= link_to "Sign Up", new_user_registration_path %>
+           <% end %>
+         </div>
+	</div>
 
-</body>
+		<%= yield %>
+
+	</body>
 </html>
